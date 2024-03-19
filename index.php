@@ -34,6 +34,77 @@ include_once "./api/db.php";
                 <div id="menuput" class="dbor">
                     <!--主選單放此-->
                     <span class="t botli">主選單區</span>
+
+
+                    <style>
+                    a {
+                        text-decoration: none;
+                    }
+
+                    .title {
+                        width: 200px;
+                        height: 35px;
+                        background: url('./icon/menu.fw.png');
+                        margin: 10px;
+                        text-align: center;
+                        line-height: 35px;
+                        position: relative;
+                    }
+
+                    .title:hover {
+                        background: url('./icon/menu2.fw.png');
+                    }
+
+                    .alt {
+                        width: 200px;
+                        height: 35px;
+                        background: url('./icon/menu3.fw.png');
+                        margin: 2px;
+                        text-align: center;
+                        line-height: 35px;
+                        position: relative;
+                        top: -20px;
+                        left: 20%;
+                        display: none;
+                        z-index: 100;
+                    }
+
+                    .alt:hover {
+                        background: url('./icon/menu4.fw.png');
+                    }
+                    </style>
+                    <?php
+                    $menus = $Menu->all(['sh' => 1, 'big_id' => 0]);
+                    foreach ($menus as $menu) {
+                    ?>
+                    <div class="sswww">
+                        <div class="title"><a href="<?= $menu['url'] ?>"><?= $menu['text'] ?></a></div>
+                        <?php
+                            $subs = $Menu->all(['sh' => 1, 'big_id' => $menu['id']]);
+                            foreach ($subs as $sub) {
+                            ?>
+                        <div class="alt"><a href="<?= $sub['url'] ?>"><?= $sub['text'] ?></a></div>
+                        <?php
+                            }
+                            ?>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                    <script>
+                    $(".sswww").hover(
+                        function() {
+                            $('.alt').hide();
+                            $(this).children('.alt').show();
+                        },
+                        function() {
+                            $('.alt').hide();
+                        })
+                    </script>
+
+
+
+
                 </div>
                 <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     <span class="t">進站總人數 :
@@ -59,21 +130,6 @@ include_once "./api/db.php";
             <div id="alt"
                 style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;">
             </div>
-            <script>
-            $(".sswww").hover(
-                function() {
-                    $("#alt").html("" + $(this).children(".all").html() + "").css({
-                        "top": $(this).offset().top - 50
-                    })
-                    $("#alt").show()
-                }
-            )
-            $(".sswww").mouseout(
-                function() {
-                    $("#alt").hide()
-                }
-            )
-            </script>
             <div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
                 <!--右邊-->
                 <button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;"

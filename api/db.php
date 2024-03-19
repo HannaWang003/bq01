@@ -101,3 +101,4 @@ class DB
 $Mvim = new DB('mvim');
 $News = new DB('news');
 $Image = new DB('image');
+$Menu = new DB('menu');
