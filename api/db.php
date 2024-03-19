@@ -99,3 +99,4 @@ class DB
     }
 }
 $Mvim = new DB('mvim');
+$News = new DB('news');
