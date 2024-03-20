@@ -102,3 +102,5 @@ $Mvim = new DB('mvim');
 $News = new DB('news');
 $Image = new DB('image');
 $Menu = new DB('menu');
+$Admin = new DB('admin');
+$Title = new DB('title');
