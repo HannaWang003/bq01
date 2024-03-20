@@ -128,7 +128,13 @@ include_once "./api/db.php";
             <span class="t" style="line-height:123px;"></span>
         </div>
     </div>
-
+    <script>
+    function logout() {
+        $.post('./api/logout.php', function(res) {
+            location.href = "./index.php";
+        })
+    }
+    </script>
 </body>
 
 </html>

@@ -104,3 +104,4 @@ $Image = new DB('image');
 $Menu = new DB('menu');
 $Admin = new DB('admin');
 $Title = new DB('title');
+$Ad = new DB('ad');

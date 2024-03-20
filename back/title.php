@@ -1,10 +1,13 @@
+<?php
+$type = "網站標題";
+?>
 <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
-    <p class="t cent botli">網站標題管理</p>
-    <form method="post" action="./api/edit_title.php">
+    <p class="t cent botli"><?= $type ?>管理</p>
+    <form method="post" action="./api/edit_text.php?do=<?= $_GET['do'] ?>">
         <table width="100%">
             <tbody>
                 <tr class="yel">
-                    <td width="45%">網站標題</td>
+                    <td width="45%"><?= $type ?></td>
                     <td width="23%">替代文字</td>
                     <td width="7%">顯示</td>
                     <td width="7%">刪除</td>
@@ -19,7 +22,7 @@
                         <td width="23%"><input type="text" name="text[]" value="<?= $row['text'] ?>"></td>
                         <td width="7%"><input type="radio" name="sh[]" value="<?= $row['id'] ?>" <?= ($row['sh'] == 1) ? "checked" : "" ?>></td>
                         <td width="7%"><input type="checkbox" name="del[]" value="<?= $row['id'] ?>" id=""></td>
-                        <td><input type="button" onclick="op('#cover','#cvr','./back/edit_title.php')" value="更新圖片"></button></td>
+                        <td><input type="button" onclick="op('#cover','#cvr','./back/edit_title.php?id=<?= $row['id'] ?>')" value="更新圖片"></button></td>
                     </tr>
                     <input type="hidden" name="id[]" value="<?= $row['id'] ?>">
                 <?php
@@ -40,10 +43,3 @@
         </table>
     </form>
 </div>
-<script>
-    function logout() {
-        $.post('./api/logout.php', function(res) {
-            location.href = "./index.php";
-        })
-    }
-</script>
