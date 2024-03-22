@@ -105,3 +105,12 @@ $Menu = new DB('menu');
 $Admin = new DB('admin');
 $Title = new DB('title');
 $Ad = new DB('ad');
+$Total = new DB('total');
+$Bot = new DB('bot');
+
+if (!isset($_SESSION['visited'])) {
+    $total = $Total->find(1);
+    $total['total']++;
+    $Total->save($total);
+    $_SESSION['visited'] = 1;
+}

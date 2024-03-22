@@ -26,7 +26,10 @@ include_once "./api/db.php";
     <iframe style="display:none;" name="back" id="back"></iframe>
     <div id="main">
         <a title="" href="?">
-            <div class="ti" style="background:url(&#39;use/&#39;); background-size:cover;"></div>
+            <?php
+            $img = $Title->find(['sh'=>1])['img'];
+            ?>
+            <div class="ti" style="background:url('./img/<?= $img ?>'); background-size:cover;"></div>
             <!--標題-->
         </a>
         <div id="ms">
@@ -75,7 +78,9 @@ include_once "./api/db.php";
                 </div>
                 <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     <span class="t">進站總人數 :
-                        1 </span>
+                        <?php
+                        echo $Total->find(1)['total'];
+                        ?></span>
                 </div>
             </div>
             <div class="di"
@@ -93,15 +98,15 @@ include_once "./api/db.php";
                 </table>
                 <!--正中央-->
                 <?php
-				$do = ($_GET['do']) ?? "title";
-				$file = "./back/$do.php";
-				if (file_exists(($file))) {
-					include $file;
-				} else {
-					include "./back/title.php";
-				}
+                $do = ($_GET['do']) ?? "title";
+                $file = "./back/$do.php";
+                if (file_exists(($file))) {
+                    include $file;
+                } else {
+                    include "./back/title.php";
+                }
 
-				?>
+                ?>
             </div>
             <div id="alt"
                 style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;">
@@ -125,7 +130,9 @@ include_once "./api/db.php";
         <div style="clear:both;"></div>
         <div
             style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
-            <span class="t" style="line-height:123px;"></span>
+            <span class="t" style="line-height:123px;"><?php
+                                                        echo $Bot->find(1)['bot'];
+                                                        ?></span>
         </div>
     </div>
     <script>
