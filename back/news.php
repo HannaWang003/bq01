@@ -12,7 +12,14 @@ $type = "最新消息資料";
                     <td width="10%">刪除</td>
                 </tr>
                 <?php
-                $rows = $News->all();
+                $total = $News->count(['sh' => 1]);
+                $div = 5;
+                $now = ($_GET['p']) ?? 1;
+                $pages = ceil($total / $div);
+                $start = ($now - 1) * $div;
+                $num = $start;
+
+                $rows = $News->all(['sh' => 1], "limit $start,$div");
                 foreach ($rows as $row) {
                 ?>
                     <tr>
@@ -29,6 +36,24 @@ $type = "最新消息資料";
 
             </tbody>
         </table>
+        <div class="t">
+            <?php
+            if ($now - 1 > 0) {
+                $pre = $now - 1;
+                echo "<a href='?do=news&p=$pre'> < </a>";
+            }
+
+            for ($i = 1; $i <= $pages; $i++) {
+                $style = ($now == $i) ? "style='font-size:20px;color:skyblue;'" : "";
+                echo "<a href='?do=news&p=$i' $style>$i</a>";
+            }
+            if ($now + 1 <= $pages) {
+                $next = $now + 1;
+                echo "<a href='?do=news&p=$next'> > </a>";
+            }
+            ?>
+
+        </div>
         <table style="margin-top:40px; width:70%;">
             <tbody>
                 <tr>

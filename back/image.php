@@ -13,7 +13,15 @@ $type = "校園映像圖片";
                     <td></td>
                 </tr>
                 <?php
-                $rows = $Image->all();
+
+                $total = $Image->count(['sh' => 1]);
+                $div = 3;
+                $now = ($_GET['p']) ?? 1;
+                $pages = ceil($total / $div);
+                $start = ($now - 1) * $div;
+                $num = $start;
+
+                $rows = $Image->all(['sh' => 1], "limit $start,$div");
                 foreach ($rows as $row) {
                 ?>
                     <tr style="text-align:center">
@@ -29,6 +37,24 @@ $type = "校園映像圖片";
 
             </tbody>
         </table>
+        <div class="t">
+            <?php
+            if ($now - 1 > 0) {
+                $pre = $now - 1;
+                echo "<a href='?do=image&p=$pre'> < </a>";
+            }
+
+            for ($i = 1; $i <= $pages; $i++) {
+                $style = ($now == $i) ? "style='font-size:20px;color:skyblue;'" : "";
+                echo "<a href='?do=image&p=$i' $style>$i</a>";
+            }
+            if ($now + 1 <= $pages) {
+                $next = $now + 1;
+                echo "<a href='?do=image&p=$next'> > </a>";
+            }
+            ?>
+
+        </div>
         <table style="margin-top:40px; width:70%;">
             <tbody>
                 <tr>
